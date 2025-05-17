@@ -8,6 +8,6 @@ public class HealthCheckController {
 
     @GetMapping("/ping")
     public String ping() {
-        return "git actions 연동 후 pong 나오는지 확인해보자 !";
+        return "git actions + discord 연동 후 알림이 가는지 확인해보자 !";
     }
 }
