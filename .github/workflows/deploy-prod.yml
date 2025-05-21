@@ -22,7 +22,7 @@ jobs:
 
       # 3. 도커 이미지 빌드 & 푸시 - auth-service
       - name: Build & Push auth-service
-        working-directory: ./msa-auth-service
+        # working-directory: ./msa-auth-service
         run: |
           
           # resources 디렉토리가 없을 경우 생성
@@ -32,7 +32,7 @@ jobs:
           echo "${{ secrets.APPLICATION_YML }}" > src/main/resources/application.yml
           
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service .
-          docker push ${{ secrets.DOCKER_HUB_PASSWORD }}/auth-service
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service
 
       # 4. EC2에 SSH 접속 & 배포
       - name: Deploy to EC2 via SSH
