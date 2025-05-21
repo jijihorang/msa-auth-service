@@ -8,6 +8,6 @@ public class HealthCheckController {
 
     @GetMapping("/ping")
     public String ping() {
-        return "auth service git actions 동작하는지 확인";
+        return "auth service git actions 동작하는지 확인해보자구 !";
     }
 }

@@ -3,9 +3,9 @@ spring:
     name: auth-service
 
   datasource:
-    url: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
+    url: jdbc:mysql://mysql:3306/msa-practice
     username: root
-    password: ${MYSQL_ROOT_PASSWORD}
+    password: 20010815
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       initialization-fail-timeout: 0

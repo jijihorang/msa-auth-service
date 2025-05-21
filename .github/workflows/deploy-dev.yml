@@ -24,6 +24,13 @@ jobs:
       - name: Build & Push dev auth-service
         working-directory: ./msa-auth-service
         run: |
+          
+          # resources 디렉토리가 없을 경우 생성
+          mkdir -p src/main/resources 
+          
+          # GitHub Secrets에 등록한 application.yml 내용을 복사
+          echo "${{ secrets.APPLICATION_YML }}" > src/main/resources/application.yml
+          
           docker build -t ${{ secrets.DOCKER_USERNAME }}/auth-service:dev .
           docker push ${{ secrets.DOCKER_USERNAME }}/auth-service:dev
 
@@ -35,7 +42,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/msa-infra
+            cd ~/auth-service
+            
             docker-compose pull auth-service-dev
             docker-compose up -d auth-service-dev
             docker image prune -f
@@ -59,5 +67,5 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_BACK }}
         with:
           args: |
-            ❌ [${{ github.actor }}]님이 `dev` 브랜치에서 **배포를 완료**했어요!
+            ❌ [${{ github.actor }}]님이 `dev` 브랜치에서 **배포를 실패**했어요!
             🔍 에러 로그를 확인해주세요.

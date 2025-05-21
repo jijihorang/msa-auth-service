@@ -24,6 +24,13 @@ jobs:
       - name: Build & Push auth-service
         working-directory: ./msa-auth-service
         run: |
+          
+          # resources 디렉토리가 없을 경우 생성
+          mkdir -p src/main/resources 
+          
+          # GitHub Secrets에 등록한 application.yml 내용을 복사
+          echo "${{ secrets.APPLICATION_YML }}" > src/main/resources/application.yml
+          
           docker build -t ${{ secrets.DOCKER_USERNAME }}/auth-service .
           docker push ${{ secrets.DOCKER_USERNAME }}/auth-service
 
@@ -35,7 +42,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/msa-infra
+            cd ~/auth-service
+                      
             docker-compose pull auth-service-prod
             docker-compose up -d auth-service-prod
             docker image prune -f
