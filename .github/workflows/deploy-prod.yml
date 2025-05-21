@@ -29,7 +29,7 @@ jobs:
           mkdir -p src/main/resources 
           
           # GitHub Secrets에 등록한 application.yml 내용을 복사
-          echo "${{ secrets.APPLICATION_YML }}" > src/main/resources/application.yml
+          echo "${{ secrets.APPLICATION_YML }}" base64 -d > src/main/resources/application.yml
           
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service .
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service
