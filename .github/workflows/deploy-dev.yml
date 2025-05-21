@@ -17,8 +17,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       # 3. 도커 이미지 빌드 & 푸시 - auth-service
       - name: Build & Push dev auth-service
@@ -31,8 +31,8 @@ jobs:
           # GitHub Secrets에 등록한 application.yml 내용을 복사
           echo "${{ secrets.APPLICATION_YML }}" > src/main/resources/application.yml
           
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/auth-service:dev .
-          docker push ${{ secrets.DOCKER_USERNAME }}/auth-service:dev
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:dev .
+          docker push ${{ secrets.DOCKER_HUB_PASSWORD }}/auth-service:dev
 
       # 4. EC2에 SSH 접속 & 배포
       - name: Deploy to EC2 via SSH
