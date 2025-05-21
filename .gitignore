@@ -38,3 +38,5 @@ out/
 
 # Application config
 application-local.yml
+
+.env
