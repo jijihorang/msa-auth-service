@@ -44,8 +44,8 @@ jobs:
           script: |
             cd ~/auth-service
                       
-            docker-compose pull auth-service-prod
-            docker-compose up -d auth-service-prod
+            docker-compose pull auth-prod
+            docker-compose up -d auth-prod
             docker image prune -f
 
       # 5-1. 성공 시 알림
